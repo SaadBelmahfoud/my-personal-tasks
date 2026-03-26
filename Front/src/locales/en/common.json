@@ -62,7 +62,16 @@
     "passwordsDoNotMatch": "Passwords do not match",
     "passwordTooShort": "Password must be at least 6 characters",
     "registrationSuccess": "Account created successfully",
-    "loginSuccess": "Welcome back!"
+    "loginSuccess": "Welcome back!",
+    "forgotPasswordTitle": "Forgot Password",
+    "forgotPasswordDesc": "Enter your email address and we'll send you a link to reset your password.",
+    "emailPlaceholder": "example@email.com",
+    "sendResetLink": "Send Reset Link",
+    "backToLogin": "Back to Login",
+    "emailSent": "Email Sent",
+    "forgotPasswordSuccess": "If an account exists with this email address, you will receive an email with instructions to reset your password.",
+    "didntReceiveEmail": "Didn't receive the email?",
+    "tryAgain": "Try Again"
   },
   "nav": {
     "dashboard": "Dashboard",
