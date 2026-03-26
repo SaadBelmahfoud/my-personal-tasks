@@ -10,7 +10,19 @@ import { AppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { ArrowLeft, Loader2, Calendar, Clock, CheckCircle2, Circle, Edit, Trash2, MessageSquare, Paperclip } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import type { Task } from '@/types';
 
@@ -25,6 +37,7 @@ export default function TaskDetailPage() {
   const [task, setTask] = useState<Task | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const { toast } = useToast();
 
   useEffect(() => {
     if (hydrated && !isAuthenticated) {
@@ -80,13 +93,20 @@ export default function TaskDetailPage() {
   const handleDelete = async () => {
     if (!task) return;
     
-    if (confirm(t('tasks.deleteConfirm'))) {
-      try {
-        await taskService.deleteTask(task.id);
-        router.push('/tasks');
-      } catch (err) {
-        console.error('Failed to delete task:', err);
-      }
+    try {
+      await taskService.deleteTask(task.id);
+      toast({
+        title: t('common.success'),
+        description: t('tasks.deletedSuccess'),
+      });
+      router.push('/tasks');
+    } catch (err) {
+      console.error('Failed to delete task:', err);
+      toast({
+        title: t('common.error'),
+        description: err instanceof Error ? err.message : 'Failed to delete task',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -193,10 +213,31 @@ export default function TaskDetailPage() {
                   <Edit className="h-4 w-4 mr-2" />
                   {t('common.edit')}
                 </Button>
-                <Button variant="destructive" size="sm" onClick={handleDelete}>
-                  <Trash2 className="h-4 w-4 mr-2" />
-                  {t('common.delete')}
-                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" size="sm">
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      {t('common.delete')}
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>{t('common.confirm')}</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        {t('tasks.deleteConfirm')}
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleDelete}
+                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                      >
+                        {t('common.delete')}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </div>
 
