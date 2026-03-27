@@ -1,0 +1,31 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # H2 Console disabled for production security
+  h2:
+    console:
+      enabled: false
+
+# Production security settings
+jwt:
+  # In production, use environment variable: JWT_SECRET
+  # Never commit actual production secrets to source control
+  access-token-expiration: 900000    # 15 minutes
+  refresh-token-expiration: 604800000 # 7 days
+
+logging:
+  level:
+    com.mypersonaltasks: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
