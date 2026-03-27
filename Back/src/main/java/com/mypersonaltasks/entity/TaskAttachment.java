@@ -8,7 +8,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "task_attachments")
+@Table(name = "task_attachments", indexes = {
+        @Index(name = "idx_attachment_task_id", columnList = "task_id"),
+        @Index(name = "idx_attachment_uploaded_by", columnList = "uploaded_by_id")
+})
 @Getter
 @Setter
 @NoArgsConstructor

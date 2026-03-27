@@ -8,7 +8,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "comments", indexes = {
+        @Index(name = "idx_comment_task_id", columnList = "task_id"),
+        @Index(name = "idx_comment_user_id", columnList = "user_id")
+})
 @Getter
 @Setter
 @NoArgsConstructor
