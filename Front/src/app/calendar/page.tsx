@@ -135,7 +135,16 @@ export default function CalendarPage() {
     );
   }
 
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  // Internationalized day names
+  const days = [
+    t('calendar.days.mon'),
+    t('calendar.days.tue'),
+    t('calendar.days.wed'),
+    t('calendar.days.thu'),
+    t('calendar.days.fri'),
+    t('calendar.days.sat'),
+    t('calendar.days.sun'),
+  ];
   const selectedDateTasks = selectedDate ? getTasksForDay(selectedDate) : [];
 
   return (

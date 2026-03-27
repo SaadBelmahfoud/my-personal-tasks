@@ -259,5 +259,31 @@
     "networkError": "Erreur réseau. Vérifiez votre connexion.",
     "serverError": "Erreur serveur. Veuillez réessayer plus tard.",
     "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
+  },
+  "calendar": {
+    "title": "Calendrier",
+    "days": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam",
+      "sun": "Dim"
+    },
+    "months": {
+      "january": "Janvier",
+      "february": "Février",
+      "march": "Mars",
+      "april": "Avril",
+      "may": "Mai",
+      "june": "Juin",
+      "july": "Juillet",
+      "august": "Août",
+      "september": "Septembre",
+      "october": "Octobre",
+      "november": "Novembre",
+      "december": "Décembre"
+    }
   }
 }
